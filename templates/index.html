@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+
+<table>
+    <tr>
+        <td>
+            {% if band and band.name %}
+                Band name :
+            {% endif %}
+        </td>
+        <td>
+            {% if band and band.name %}
+                <strong>{{ band.name }}</strong>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% if band and band.debut_album_name %}
+                Debut album name :
+            {% endif %}
+        </td>
+        <td>
+            {% if band and band.debut_album_name %}
+                <strong>{{ band.debut_album_name }}</strong>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% if band and band.debut_album_cover_link and band.debut_album_cover_path %}
+                Cover of your debut album :
+            {% endif %}
+        </td>
+        <td>
+            {% if band and band.debut_album_cover_link and band.debut_album_cover_path %}
+                <a href="http://www.flickr.com{{ band.debut_album_cover_link }}"><img src="{{ band.debut_album_cover_path }}" /></a>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {% if band %}
+                <a href="/band/{{ band.key.id }}">Share this</a>
+            {% endif %} &nbsp;
+                <a href="/">Generate another</a>
+        </td>
+    </tr>
+</table>
+<hr/>
+
+
+
+{% if latest_bands %}
+
+<h2>Recent bands<br /></h2>
+
+<table style="width: 100%">
+    <tr>
+        {% for band in latest_bands %}
+        <td style="width: 20%">
+            {% if band and band.name %}
+                <a href="/band/{{ band.key.id }}">{{ band.name }}</a>
+            {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
+</table>
+{% endif %}
+
+{% endblock %}
