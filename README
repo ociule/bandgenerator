@@ -1,0 +1,15 @@
+h2. Need a new band indentity?
+
+Suffer writer's block in naming your new band ? This little app will give you not only band name ideas, but also first album name and cover!
+
+h2. Install
+
+Like any other App Engine app. Checkout, the use the GAE script to run on the dev server or deploy on your own instance.
+
+h2. Dependencies
+
+Google App Engine, obviously.
+
+h2. Demo
+
+See it at bandgenerator.appspot.com
