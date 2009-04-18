@@ -6,3 +6,8 @@ api_version: 1
 handlers:
 - url: .*
   script: main.py
+
+- url: /google0ce264c025879ac3.html
+  static_files: static_media/pages/google0ce264c025879ac3.html
+  upload: static_media/pages/google0ce264c025879ac3.html
+
