@@ -5,8 +5,12 @@ api_version: 1
 
 handlers:
 - url: /google0ce264c025879ac3.html
-  static_files: static_media/pages/google0ce264c025879ac3.html
-  upload: static_media/pages/google0ce264c025879ac3.html
-
+  static_files: static/pages/google0ce264c025879ac3.html
+  upload: static/pages/google0ce264c025879ac3.html
+- url: /bsmain
+  static_files: static/bootstrap-fluid.html
+  upload: static/bootstrap-fluid.html
+- url: /static
+  static_dir: static
 - url: .*
   script: main.py

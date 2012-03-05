@@ -1,72 +1,34 @@
 {% extends "base.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
-
-<table>
-    <tr>
-        <td>
-            {% if band and band.name %}
-                Band name :
-            {% endif %}
-        </td>
-        <td>
-            {% if band and band.name %}
-                <strong>{{ band.name }}</strong>
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {% if band and band.debut_album_name %}
-                Debut album name :
-            {% endif %}
-        </td>
-        <td>
-            {% if band and band.debut_album_name %}
-                <strong>{{ band.debut_album_name }}</strong>
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <td>
+      <header class="header page-header hero-unit">
+        <div class="row-fluid">
+        <div class="span3 offset1">
             {% if band and band.debut_album_cover_link and band.debut_album_cover_path %}
-                Cover of your debut album :
-            {% endif %}
-        </td>
-        <td>
-            {% if band and band.debut_album_cover_link and band.debut_album_cover_path %}
-                <a href="http://www.flickr.com{{ band.debut_album_cover_link }}"><img src="{{ band.debut_album_cover_path }}" /></a>
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            {% if band %}
-                <a href="/band/{{ band.key.id }}">Share this</a>
-            {% endif %} &nbsp;
-                <a href="/">Generate another</a>
-        </td>
-    </tr>
-</table>
-<hr/>
-
-
+                <a href="http://www.flickr.com{{ band.debut_album_cover_link }}"><img src="{{ band.debut_album_cover_path }}" /></a>  
+            {% endif%}
+        </div>
+        <div class="span6">
+        <p>Here's your new band!</p>
+        <h1>{% if band %}{{ band.name }}{% endif %}</h1>
+        <p>{% if band and band.debut_album_name %}Debut album: {{ band.debut_album_name }} {% endif %}</p>
+        <p><a href="http://flikr.com{{ band.debut_album_cover_link }}" class="btn btn-large">View cover</a>
+        <a href="/band/{{ band.key.id }}" class="btn btn-large">Share &raquo;</a> <a href="/" class="btn btn-large btn-primary">Generate another!</a></p>
+        </div>
+        </div>
+      </header>
 
 {% if latest_bands %}
-
-<h2>Recent bands<br /></h2>
-
-<table style="width: 100%">
-    <tr>
+      <section id="history">
+        <h2>Recently generated bands:</h2>
+      <div class="row-fluid">
         {% for band in latest_bands %}
-        <td style="width: 20%">
-            {% if band and band.name %}
-                <a href="/band/{{ band.key.id }}">{{ band.name }}</a>
-            {% endif %}
-        </td>
+        <div class="span4">
+          <h3>{% if band and band.name %}{{ band.name }}{% endif %}</h3>
+          <p><a class="btn" href="/band/{{band.key.id}}">View &raquo;</a></p>
+        </div><!--/span-->
         {% endfor %}
-    </tr>
-</table>
+      </div><!--/row-->
+      </section>
 {% endif %}
-
 {% endblock %}

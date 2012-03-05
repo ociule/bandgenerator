@@ -48,7 +48,7 @@ class BaseRequestHandler(webapp.RequestHandler):
            is an empty dictionary.
     """
 
-    latest_bands = db.GqlQuery("SELECT * FROM Band ORDER BY created DESC LIMIT 5")
+    latest_bands = db.GqlQuery("SELECT * FROM Band ORDER BY created DESC LIMIT 3")
     #latest_bands = map(lambda x: x.fix_encoding(), latest_bands)
     latest_fixed = []
     for band in latest_bands:
