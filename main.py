@@ -49,7 +49,6 @@ class BaseRequestHandler(webapp.RequestHandler):
     """
 
     latest_bands = db.GqlQuery("SELECT * FROM Band ORDER BY created DESC LIMIT 3")
-    #latest_bands = map(lambda x: x.fix_encoding(), latest_bands)
     latest_fixed = []
     for band in latest_bands:
         band.fix_encoding()
@@ -88,11 +87,21 @@ class ViewHandler(BaseRequestHandler):
 
     band = Band.get_by_id(band_id)
     band.fix_encoding()
-    self.generate('index.html', template_values={'page_title': 'Band Generator - Generate a band!',
+    band_name = band.name if band and band.name else ""
+    self.generate('index.html', template_values={'page_title': band_name + 'Band Generator - Generate a band!',
                                                 'band' : band,
+                                                'disqus': True,
                                                 })
 
+
+class AboutHandler(BaseRequestHandler):
+
+  def get(self):
+    self.generate('about.html', template_values={'page_title': 'About - Band Generator - Generate a band!',
+                                                'disqus': True,
+                                                })
 _URLS = [('/',              MainHandler),
+         ('/about/?',        AboutHandler),
          ('/band/',         MainHandler),
          ('/band/([^/]+)',  ViewHandler)]
 

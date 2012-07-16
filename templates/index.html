@@ -10,25 +10,11 @@
         </div>
         <div class="span6">
         <p>Here's your new band!</p>
-        <h1>{% if band %}{{ band.name }}{% endif %}</h1>
+        <h1><a href="/band/{{ band.key.id }}">{% if band %}{{ band.name }}{% endif %}</a></h1>
         <p>{% if band and band.debut_album_name %}Debut album: {{ band.debut_album_name }} {% endif %}</p>
         <p><a href="http://flikr.com{{ band.debut_album_cover_link }}" class="btn btn-large">View cover</a>
         <a href="/band/{{ band.key.id }}" class="btn btn-large">Share &raquo;</a> <a href="/" class="btn btn-large btn-primary">Generate another!</a></p>
         </div>
         </div>
       </header>
-
-{% if latest_bands %}
-      <section id="history">
-        <h2>Recently generated bands:</h2>
-      <div class="row-fluid">
-        {% for band in latest_bands %}
-        <div class="span4">
-          <h3>{% if band and band.name %}{{ band.name }}{% endif %}</h3>
-          <p><a class="btn" href="/band/{{band.key.id}}">View &raquo;</a></p>
-        </div><!--/span-->
-        {% endfor %}
-      </div><!--/row-->
-      </section>
-{% endif %}
 {% endblock %}

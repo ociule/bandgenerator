@@ -9,15 +9,6 @@
 
     <!-- Le styles -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
     <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -42,11 +33,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Band Generator</a>
+          <a class="brand" href="/">Band Generator</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
             {% if user %}
             <p class="navbar-text pull-right">Logged in as <a href="/profile/{{ user.email }}">{{ user.nickname }}</a></p>
@@ -61,13 +52,48 @@
     {% block content %}
     {% endblock %}
 
+    {% if latest_bands %}
+        <section id="history">
+            <h2>Recently generated bands:</h2>
+            <div class="row-fluid">
+            {% for band in latest_bands %}
+                <div class="span4">
+                <h3><a href="/band/{{band.key.id}}">{% if band and band.name %}{{ band.name }}{% endif %}</a></h3>
+                <p><a class="btn" href="/band/{{band.key.id}}">View &raquo;</a></p>
+            </div><!--/span-->
+            {% endfor %}
+          </div><!--/row-->
+          </section>
+    {% endif %}
+
+    {% if disqus %}
+    <section>
+    <hr>
+    <div class="row-fluid">
+        <div id="disqus_thread" class="span12"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'bandgenerator'; // required: replace example with your forum shortname
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div><!--/.row-fluid -->
+    </section>
+    {% endif %}
+
     <hr>
     {% block footer %}
     <footer>
         <p>&copy; Ovidiu Ciule 2012</p>
     </footer>
     {% endblock %}
-    </div>
 
     </div><!--/.fluid-container-->
     
