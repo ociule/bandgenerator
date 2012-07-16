@@ -20,8 +20,8 @@ class Band(db.Model):
        Debut album name : Wikiquote Special:Random
        Debut album cover : Flickr, "last seven day page", choose the 3rd pic
     """
-    self.name, self.content = Band.getRandomWikipediaPageTitle()
-    self.debut_album_name, content = Band.getRandomWikiquotePageTitle()
+    self.name = Band.getRandomWikipediaPageTitle()
+    self.debut_album_name = Band.getRandomWikiquotePageTitle()
     self.debut_album_cover_path, self.debut_album_cover_link = Band.getRandomFlickrPhotoPath()
     
   @staticmethod
@@ -42,7 +42,7 @@ class Band(db.Model):
         ix_title_end = title.find(end_title_token)
         if ix_title_end > -1:
           title = title[0:ix_title_end]
-          return title, content
+          return title
       retries += 1
       
   @staticmethod
