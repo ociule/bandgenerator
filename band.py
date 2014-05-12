@@ -59,7 +59,7 @@ class Band(db.Model):
   @staticmethod
   def getRandomFlickrPhotoPath():
     random_url = "https://www.flickr.com/explore/interesting/7days/"
-    first_image_start = "\"http://farm"
+    first_image_start = "\"https://farm"
     first_image_end   = ".jpg\" "
 
     first_link_start  = "href=\"/photos/"
@@ -69,6 +69,7 @@ class Band(db.Model):
     max_retries = 5
     while retries < max_retries:
       random_page = urlfetch.fetch(random_url, payload=None, method=urlfetch.GET, headers={}, allow_truncated=True, follow_redirects=True)
+      print random_page.content[:100]
       content = unicode(random_page.content.decode("latin_1"))
       
       ix_first_image_start = content.find(first_image_start)
