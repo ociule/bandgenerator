@@ -18,10 +18,10 @@
 
 from band import Band
 import os
-import wsgiref.handlers
 
 
-from google.appengine.ext import webapp
+import webapp2
+# @TODO this will not work anymore!
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
 
@@ -30,7 +30,7 @@ from google.appengine.ext import db
 _DEBUG = True
 
 
-class BaseRequestHandler(webapp.RequestHandler):
+class BaseRequestHandler(webapp2.RequestHandler):
   """Base request handler extends webapp.Request handler
 
      It defines the generate method, which renders a Django template
@@ -48,6 +48,7 @@ class BaseRequestHandler(webapp.RequestHandler):
            is an empty dictionary.
     """
 
+    print 111
     latest_bands = db.GqlQuery("SELECT * FROM Band ORDER BY created DESC LIMIT 3")
     latest_fixed = []
     for band in latest_bands:
@@ -105,11 +106,5 @@ _URLS = [('/',              MainHandler),
          ('/band/',         MainHandler),
          ('/band/([^/]+)',  ViewHandler)]
 
-def main():
-  application = webapp.WSGIApplication(_URLS,
-                                       debug=_DEBUG)
-  wsgiref.handlers.CGIHandler().run(application)
-
-
-if __name__ == '__main__':
-  main()
+app = webapp2.WSGIApplication(_URLS,
+                                debug=_DEBUG)

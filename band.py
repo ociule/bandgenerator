@@ -58,7 +58,7 @@ class Band(db.Model):
 
   @staticmethod
   def getRandomFlickrPhotoPath():
-    random_url = "http://www.flickr.com/explore/interesting/7days/"
+    random_url = "https://www.flickr.com/explore/interesting/7days/"
     first_image_start = "\"http://farm"
     first_image_end   = ".jpg\" "
 
